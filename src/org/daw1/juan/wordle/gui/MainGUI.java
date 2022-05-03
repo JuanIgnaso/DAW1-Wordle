@@ -4,6 +4,10 @@
  */
 package org.daw1.juan.wordle.gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+
 /**
  *
  * @author juan navarrete
@@ -14,13 +18,48 @@ public class MainGUI extends javax.swing.JFrame {
     private static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
     private static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
+    private static final int MAX_INTENTOS = 6;
+    private static final int TAMANO_PALABRA = 5;
+    
+    private final javax.swing.JLabel[][] labels = new javax.swing.JLabel[MAX_INTENTOS][TAMANO_PALABRA];
+        
+    
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+         inicializarLabels();
+         test();
+    }
+    
+    public void test(){
+        for(int i = 0; i < labels.length; i++){
+            JLabel[] label = labels[i];
+            for(int j = 0; j < label.length; j++){
+                JLabel jLabel = label[j];
+                jLabel.setVisible(false);
+            }
+        }
     }
 
+    public final void inicializarLabels(){
+        for(int i =1; i <= MAX_INTENTOS; i++){
+            for(int j = 1; j <= TAMANO_PALABRA; j++){
+                try {
+                    String nombreLabel = "jLabel" + i + "_" + j;
+                    System.out.println(nombreLabel);
+                    javax.swing.JLabel aux = (javax.swing.JLabel)this.getClass().getDeclaredField(nombreLabel).get(this);
+                    labels[i - 1][j - 1] = aux;
+                } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,15 +278,17 @@ public class MainGUI extends javax.swing.JFrame {
         MainjPanel.add(ZonaLetrasjPanel, java.awt.BorderLayout.CENTER);
 
         BottomjPanel.setBackground(new java.awt.Color(153, 153, 153));
+        BottomjPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         BottomjPanel.setPreferredSize(new java.awt.Dimension(200, 150));
         BottomjPanel.setLayout(new java.awt.GridLayout(2, 2));
 
         estadoActualjPanel.setBackground(new java.awt.Color(153, 153, 153));
         estadoActualjPanel.setLayout(new java.awt.GridLayout(3, 0));
 
-        maljPanel.setBackground(new java.awt.Color(153, 153, 153));
-        maljPanel.setLayout(new java.awt.GridLayout());
+        maljPanel.setBackground(new java.awt.Color(204, 204, 204));
+        maljPanel.setLayout(new java.awt.GridLayout(1, 0));
 
+        malLabel.setBackground(new java.awt.Color(204, 204, 204));
         malLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         malLabel.setForeground(new java.awt.Color(255, 0, 0));
         malLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -255,20 +296,20 @@ public class MainGUI extends javax.swing.JFrame {
 
         estadoActualjPanel.add(maljPanel);
 
-        existenjPanel.setBackground(new java.awt.Color(153, 153, 153));
-        existenjPanel.setLayout(new java.awt.GridLayout());
+        existenjPanel.setBackground(new java.awt.Color(204, 204, 204));
+        existenjPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        existenLabel.setBackground(new java.awt.Color(153, 153, 153));
+        existenLabel.setBackground(new java.awt.Color(204, 204, 204));
         existenLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         existenLabel.setForeground(new java.awt.Color(204, 204, 0));
         existenjPanel.add(existenLabel);
 
         estadoActualjPanel.add(existenjPanel);
 
-        bienjPanel.setBackground(new java.awt.Color(153, 153, 153));
-        bienjPanel.setLayout(new java.awt.GridLayout());
+        bienjPanel.setBackground(new java.awt.Color(204, 204, 204));
+        bienjPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        bienjLabel.setBackground(new java.awt.Color(153, 153, 153));
+        bienjLabel.setBackground(new java.awt.Color(204, 204, 204));
         bienjLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         bienjLabel.setForeground(new java.awt.Color(0, 153, 0));
         bienjPanel.add(bienjLabel);
@@ -277,7 +318,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         BottomjPanel.add(estadoActualjPanel);
 
-        JuegoInputjPanel.setBackground(new java.awt.Color(153, 153, 153));
+        JuegoInputjPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         palabraTextField.setPreferredSize(new java.awt.Dimension(120, 24));
         JuegoInputjPanel.add(palabraTextField);
@@ -293,7 +334,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         BottomjPanel.add(JuegoInputjPanel);
 
-        ExitojPanel.setBackground(new java.awt.Color(153, 153, 153));
+        ExitojPanel.setBackground(new java.awt.Color(204, 204, 204));
         ExitojPanel.setLayout(new java.awt.GridBagLayout());
 
         finaljLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -302,7 +343,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         BottomjPanel.add(ExitojPanel);
 
-        ErrorjPanel.setBackground(new java.awt.Color(153, 153, 153));
+        ErrorjPanel.setBackground(new java.awt.Color(204, 204, 204));
         ErrorjPanel.setLayout(new java.awt.GridBagLayout());
 
         errorjLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -317,11 +358,11 @@ public class MainGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
         );
 
         pack();
