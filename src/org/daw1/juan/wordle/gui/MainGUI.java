@@ -116,6 +116,9 @@ public class MainGUI extends javax.swing.JFrame {
         finaljLabel = new javax.swing.JLabel();
         ErrorjPanel = new javax.swing.JPanel();
         errorjLabel = new javax.swing.JLabel();
+        menuSuperiorjMenuBar = new javax.swing.JMenuBar();
+        archivojMenu1 = new javax.swing.JMenu();
+        motoresjMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DAW1 Wordle Juan");
@@ -354,6 +357,23 @@ public class MainGUI extends javax.swing.JFrame {
 
         MainjPanel.add(BottomjPanel, java.awt.BorderLayout.PAGE_END);
 
+        menuSuperiorjMenuBar.setBackground(new java.awt.Color(204, 204, 204));
+        menuSuperiorjMenuBar.setForeground(new java.awt.Color(51, 51, 51));
+
+        archivojMenu1.setBackground(new java.awt.Color(204, 204, 204));
+        archivojMenu1.setForeground(new java.awt.Color(51, 51, 51));
+        archivojMenu1.setText("Archivo");
+        archivojMenu1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        menuSuperiorjMenuBar.add(archivojMenu1);
+
+        motoresjMenu2.setBackground(new java.awt.Color(204, 204, 204));
+        motoresjMenu2.setForeground(new java.awt.Color(51, 51, 51));
+        motoresjMenu2.setText("Motores");
+        motoresjMenu2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        menuSuperiorjMenuBar.add(motoresjMenu2);
+
+        setJMenuBar(menuSuperiorjMenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,7 +382,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
         );
 
         pack();
@@ -414,6 +434,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel JuegoInputjPanel;
     private javax.swing.JPanel MainjPanel;
     private javax.swing.JPanel ZonaLetrasjPanel;
+    private javax.swing.JMenu archivojMenu1;
     private javax.swing.JLabel bienjLabel;
     private javax.swing.JPanel bienjPanel;
     private javax.swing.JButton enviarButton;
@@ -454,6 +475,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6_5;
     private javax.swing.JLabel malLabel;
     private javax.swing.JPanel maljPanel;
+    private javax.swing.JMenuBar menuSuperiorjMenuBar;
+    private javax.swing.JMenu motoresjMenu2;
     private javax.swing.JTextField palabraTextField;
     // End of variables declaration//GEN-END:variables
 }
