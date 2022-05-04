@@ -33,10 +33,16 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         altaPalabrajPanel = new javax.swing.JPanel();
         anadirPalabrajPanel = new javax.swing.JPanel();
+        addPalabrajTextField = new javax.swing.JTextField();
+        anadirjButton = new javax.swing.JButton();
         errorAnadirjPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         borradoPalabrajPanel = new javax.swing.JPanel();
         borrarjPanel = new javax.swing.JPanel();
+        borrarjTextField = new javax.swing.JTextField();
+        borrarButton = new javax.swing.JButton();
         errorBorrarjPanel = new javax.swing.JPanel();
+        errorBorrarjLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,18 +67,80 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 1));
 
+        altaPalabrajPanel.setBackground(new java.awt.Color(204, 204, 204));
+        altaPalabrajPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alta Palabra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        altaPalabrajPanel.setForeground(new java.awt.Color(0, 0, 0));
         altaPalabrajPanel.setLayout(new java.awt.GridLayout(2, 1));
+
+        anadirPalabrajPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        addPalabrajTextField.setPreferredSize(new java.awt.Dimension(120, 20));
+        addPalabrajTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPalabrajTextFieldActionPerformed(evt);
+            }
+        });
+        anadirPalabrajPanel.add(addPalabrajTextField);
+
+        anadirjButton.setBackground(new java.awt.Color(204, 204, 204));
+        anadirjButton.setForeground(new java.awt.Color(0, 0, 0));
+        anadirjButton.setText("Añadir");
+        anadirjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        anadirjButton.setPreferredSize(new java.awt.Dimension(75, 24));
+        anadirjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anadirjButtonActionPerformed(evt);
+            }
+        });
+        anadirPalabrajPanel.add(anadirjButton);
+
         altaPalabrajPanel.add(anadirPalabrajPanel);
 
-        errorAnadirjPanel.setLayout(new java.awt.GridBagLayout());
+        errorAnadirjPanel.setBackground(new java.awt.Color(204, 204, 204));
+        java.awt.GridBagLayout errorAnadirjPanelLayout = new java.awt.GridBagLayout();
+        errorAnadirjPanelLayout.columnWidths = new int[] {2};
+        errorAnadirjPanelLayout.columnWeights = new double[] {1.0};
+        errorAnadirjPanel.setLayout(errorAnadirjPanelLayout);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        errorAnadirjPanel.add(jLabel1, new java.awt.GridBagConstraints());
+
         altaPalabrajPanel.add(errorAnadirjPanel);
 
         jPanel1.add(altaPalabrajPanel);
 
+        borradoPalabrajPanel.setBackground(new java.awt.Color(204, 204, 204));
+        borradoPalabrajPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Borrado Palabra", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        borradoPalabrajPanel.setForeground(new java.awt.Color(0, 0, 0));
         borradoPalabrajPanel.setLayout(new java.awt.GridLayout(2, 1));
+
+        borrarjPanel.setBackground(new java.awt.Color(204, 204, 204));
+
+        borrarjTextField.setPreferredSize(new java.awt.Dimension(120, 20));
+        borrarjPanel.add(borrarjTextField);
+
+        borrarButton.setBackground(new java.awt.Color(204, 204, 204));
+        borrarButton.setForeground(new java.awt.Color(0, 0, 0));
+        borrarButton.setText("Borrar");
+        borrarButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        borrarButton.setPreferredSize(new java.awt.Dimension(75, 24));
+        borrarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarButtonActionPerformed(evt);
+            }
+        });
+        borrarjPanel.add(borrarButton);
+
         borradoPalabrajPanel.add(borrarjPanel);
 
+        errorBorrarjPanel.setBackground(new java.awt.Color(204, 204, 204));
         errorBorrarjPanel.setLayout(new java.awt.GridBagLayout());
+
+        errorBorrarjLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        errorBorrarjLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorBorrarjPanel.add(errorBorrarjLabel, new java.awt.GridBagConstraints());
+
         borradoPalabrajPanel.add(errorBorrarjPanel);
 
         jPanel1.add(borradoPalabrajPanel);
@@ -96,6 +164,18 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void anadirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anadirjButtonActionPerformed
+
+    private void addPalabrajTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPalabrajTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addPalabrajTextFieldActionPerformed
+
+    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,13 +214,19 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TitulojPanel;
+    private javax.swing.JTextField addPalabrajTextField;
     private javax.swing.JPanel altaPalabrajPanel;
     private javax.swing.JPanel anadirPalabrajPanel;
+    private javax.swing.JButton anadirjButton;
     private javax.swing.JPanel borradoPalabrajPanel;
+    private javax.swing.JButton borrarButton;
     private javax.swing.JPanel borrarjPanel;
+    private javax.swing.JTextField borrarjTextField;
     private javax.swing.JPanel errorAnadirjPanel;
+    private javax.swing.JLabel errorBorrarjLabel;
     private javax.swing.JPanel errorBorrarjPanel;
     private javax.swing.JLabel gestionTitulojLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainControlesjPanel;
     // End of variables declaration//GEN-END:variables
