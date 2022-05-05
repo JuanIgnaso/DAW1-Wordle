@@ -12,7 +12,7 @@ public class MotorTest implements IMotor {
 
     @Override
     public boolean checkPalabra(String palabra) {
-        
+        return true;
     }
 
     @Override
@@ -22,10 +22,12 @@ public class MotorTest implements IMotor {
 
     @Override
     public boolean addPalabra(String palabra) {
+        return true;
     }
 
     @Override
     public boolean removePalabra(String palabra) {
+        return true;
     }
     
 }

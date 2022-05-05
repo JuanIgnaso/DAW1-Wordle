@@ -7,12 +7,15 @@ package org.daw1.juan.wordle.gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import org.daw1.juan.wordle.motores.*;
 
 /**
  *
  * @author juan navarrete
  */
 public class MainGUI extends javax.swing.JFrame {
+    
+    private IMotor motor;
 
     private static final java.awt.Color COLOR_VERDE = new java.awt.Color(0,153,0);
     private static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
@@ -29,10 +32,9 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
+        motor = new MotorTest();
         initComponents();
          inicializarLabels();
-         test();
-         test(1);
     }
     
         //AFECTA A TODAS
@@ -85,6 +87,7 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        motoresButtonGroup = new javax.swing.ButtonGroup();
         MainjPanel = new javax.swing.JPanel();
         ZonaLetrasjPanel = new javax.swing.JPanel();
         jLabel1_1 = new javax.swing.JLabel();
@@ -135,6 +138,8 @@ public class MainGUI extends javax.swing.JFrame {
         menuSuperiorjMenuBar = new javax.swing.JMenuBar();
         archivojMenu1 = new javax.swing.JMenu();
         motoresjMenu2 = new javax.swing.JMenu();
+        motorTestjRadioButton = new javax.swing.JRadioButtonMenuItem();
+        motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DAW1 Wordle Juan");
@@ -386,6 +391,26 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.setForeground(new java.awt.Color(51, 51, 51));
         motoresjMenu2.setText("Motores");
         motoresjMenu2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        motoresButtonGroup.add(motorTestjRadioButton);
+        motorTestjRadioButton.setSelected(true);
+        motorTestjRadioButton.setText("Motor Test");
+        motorTestjRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorTestjRadioButtonActionPerformed(evt);
+            }
+        });
+        motoresjMenu2.add(motorTestjRadioButton);
+
+        motoresButtonGroup.add(motorFicherojRadioButton);
+        motorFicherojRadioButton.setText("Motor Esp");
+        motorFicherojRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorFicherojRadioButtonActionPerformed(evt);
+            }
+        });
+        motoresjMenu2.add(motorFicherojRadioButton);
+
         menuSuperiorjMenuBar.add(motoresjMenu2);
 
         setJMenuBar(menuSuperiorjMenuBar);
@@ -408,6 +433,25 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enviarButtonActionPerformed
 
+    private void motorTestjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestjRadioButtonActionPerformed
+       seleccionarMotor();
+    }//GEN-LAST:event_motorTestjRadioButtonActionPerformed
+
+    private void motorFicherojRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorFicherojRadioButtonActionPerformed
+       seleccionarMotor();
+    }//GEN-LAST:event_motorFicherojRadioButtonActionPerformed
+
+    
+    private void seleccionarMotor(){
+         if(this.motorTestjRadioButton.isSelected()){
+            motor = new MotorTest();
+             this.errorjLabel.setText("Se ha seleccionado el motor Test.");
+        }else if(this.motorFicherojRadioButton.isSelected()){
+           motor = new MotorFichero();
+           this.errorjLabel.setText("Se ha seleccionado el motor Español.");
+       }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -492,6 +536,9 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel malLabel;
     private javax.swing.JPanel maljPanel;
     private javax.swing.JMenuBar menuSuperiorjMenuBar;
+    private javax.swing.JRadioButtonMenuItem motorFicherojRadioButton;
+    private javax.swing.JRadioButtonMenuItem motorTestjRadioButton;
+    private javax.swing.ButtonGroup motoresButtonGroup;
     private javax.swing.JMenu motoresjMenu2;
     private javax.swing.JTextField palabraTextField;
     // End of variables declaration//GEN-END:variables
