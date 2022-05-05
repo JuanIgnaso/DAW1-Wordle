@@ -18,6 +18,7 @@ public class MainGUI extends javax.swing.JFrame {
     private static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
     private static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
+    private static int INTENTOS = 0;
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
     
@@ -31,9 +32,11 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
          inicializarLabels();
          test();
+         test(1);
     }
     
-    public void test(){
+        //AFECTA A TODAS
+        public void test(){
         for(int i = 0; i < labels.length; i++){
             JLabel[] label = labels[i];
             for(int j = 0; j < label.length; j++){
@@ -42,6 +45,19 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
     }
+    
+    //AFECTA A FILA PASADA POR PARAMETRO
+    public void test(int num){
+        JLabel[] label = labels[num];
+        for (int j = 0; j < label.length; j++) {
+            JLabel jLabel = label[j];
+            jLabel.setForeground(COLOR_ROJO);
+        }
+    }
+    
+    
+
+
 
     public final void inicializarLabels(){
         for(int i =1; i <= MAX_INTENTOS; i++){
