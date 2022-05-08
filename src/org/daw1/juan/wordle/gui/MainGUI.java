@@ -18,9 +18,9 @@ public class MainGUI extends javax.swing.JFrame {
     
     private IMotor motor;
 
-    private static final java.awt.Color COLOR_VERDE = new java.awt.Color(0,153,0);
-    private static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
-    private static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
+    protected static final java.awt.Color COLOR_VERDE = new java.awt.Color(0,153,0);
+    protected static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
+    protected static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
     private Set<Character>LETRAS_MAL=new TreeSet<>();
     private Set<Character>LETRAS_CONTIENE=new TreeSet<>();

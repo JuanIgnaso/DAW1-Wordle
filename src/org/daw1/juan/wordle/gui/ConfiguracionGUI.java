@@ -2,14 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.daw1.juan.wordle.motores;
-
+package org.daw1.juan.wordle.gui;
+import java.awt.Color;
+import java.util.regex.Pattern;
+import javax.swing.JTextField;
+import org.daw1.juan.wordle.motores.*;
 /**
  *
  * @author alumno
  */
 public class ConfiguracionGUI extends javax.swing.JFrame {
 
+    private IMotor motorEsp = new MotorFichero();
     /**
      * Creates new form ConfiguracionGUI
      */
@@ -17,6 +21,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +41,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
         addPalabrajTextField = new javax.swing.JTextField();
         anadirjButton = new javax.swing.JButton();
         errorAnadirjPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        addErrorjLabel1 = new javax.swing.JLabel();
         borradoPalabrajPanel = new javax.swing.JPanel();
         borrarjPanel = new javax.swing.JPanel();
         borrarjTextField = new javax.swing.JTextField();
@@ -102,9 +107,18 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
         errorAnadirjPanelLayout.columnWeights = new double[] {1.0};
         errorAnadirjPanel.setLayout(errorAnadirjPanelLayout);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        errorAnadirjPanel.add(jLabel1, new java.awt.GridBagConstraints());
+        addErrorjLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        addErrorjLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        addErrorjLabel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                addErrorjLabel1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        errorAnadirjPanel.add(addErrorjLabel1, new java.awt.GridBagConstraints());
 
         altaPalabrajPanel.add(errorAnadirjPanel);
 
@@ -166,7 +180,21 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirjButtonActionPerformed
-        // TODO add your handling code here:
+      if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.addPalabrajTextField.getText()).matches()){
+          addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
+          addErrorjLabel1.setText("La palabra no es valida.");
+          this.addPalabrajTextField.setText(null);
+      }else if(motorEsp.existePalabra(this.addPalabrajTextField.getText())){
+            addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
+          addErrorjLabel1.setText("La palabra ya existe.");
+          this.addPalabrajTextField.setText(null);
+      }else{
+         motorEsp.addPalabra(this.addPalabrajTextField.getText()); 
+         this.addPalabrajTextField.setText(null);
+          addErrorjLabel1.setForeground(new java.awt.Color(0,153,0));
+         addErrorjLabel1.setText("Palabra añadida con exito.");
+      }
+      
     }//GEN-LAST:event_anadirjButtonActionPerformed
 
     private void addPalabrajTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPalabrajTextFieldActionPerformed
@@ -176,6 +204,10 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_borrarButtonActionPerformed
+
+    private void addErrorjLabel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_addErrorjLabel1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addErrorjLabel1AncestorAdded
 
     /**
      * @param args the command line arguments
@@ -214,6 +246,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TitulojPanel;
+    private javax.swing.JLabel addErrorjLabel1;
     private javax.swing.JTextField addPalabrajTextField;
     private javax.swing.JPanel altaPalabrajPanel;
     private javax.swing.JPanel anadirPalabrajPanel;
@@ -226,7 +259,6 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
     private javax.swing.JLabel errorBorrarjLabel;
     private javax.swing.JPanel errorBorrarjPanel;
     private javax.swing.JLabel gestionTitulojLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainControlesjPanel;
     // End of variables declaration//GEN-END:variables
