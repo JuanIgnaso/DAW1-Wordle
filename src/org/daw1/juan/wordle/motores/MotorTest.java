@@ -11,7 +11,7 @@ package org.daw1.juan.wordle.motores;
 public class MotorTest implements IMotor {
 
     @Override
-    public boolean checkPalabra(String palabra) {
+    public boolean existePalabra(String palabra) {
         return true;
     }
 

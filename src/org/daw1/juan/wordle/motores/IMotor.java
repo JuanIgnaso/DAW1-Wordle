@@ -4,13 +4,15 @@
  */
 package org.daw1.juan.wordle.motores;
 
+import java.io.File;
+
 /**
  *
  * @author juan navarrete
  */
 public interface IMotor {
     
-    public boolean checkPalabra(String palabra);
+    public boolean existePalabra(String palabra);
     
     public String obtenerPalabraAleatoria();
     

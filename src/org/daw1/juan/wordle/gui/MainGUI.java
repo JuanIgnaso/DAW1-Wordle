@@ -4,6 +4,7 @@
  */
 package org.daw1.juan.wordle.gui;
 
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -21,6 +22,10 @@ public class MainGUI extends javax.swing.JFrame {
     private static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
     private static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
+    private Set<Character>LETRAS_MAL=new TreeSet<>();
+    private Set<Character>LETRAS_CONTIENE=new TreeSet<>();
+    private Set<Character>LETRAS_BIEN=new TreeSet<>();
+    
     private static int INTENTOS = 0;
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
@@ -32,11 +37,18 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
+        LETRAS_MAL.add('A');
+        LETRAS_MAL.add('B');
+         LETRAS_CONTIENE.add('A');
+        LETRAS_BIEN.add('D');
+        LETRAS_BIEN.add('F');
         motor = new MotorTest();
         initComponents();
          inicializarLabels();
+    
     }
     
+  
         //AFECTA A TODAS
         public void test(){
         for(int i = 0; i < labels.length; i++){
@@ -430,7 +442,7 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_enviarButtonActionPerformed
 
     private void motorTestjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestjRadioButtonActionPerformed
