@@ -98,6 +98,7 @@ public class MotorFichero implements IMotor {
         }
         try(BufferedReader br = new BufferedReader(new FileReader(p))){            
             String linea = br.readLine();
+                palabras.clear();
             while(linea != null){ 
                 if(!palabras.contains(linea)){
                  palabras.add(linea);   
@@ -158,15 +159,15 @@ public class MotorFichero implements IMotor {
 
     @Override
     public boolean removePalabra(String palabra) {
-         if(cargarLista(palabras)==null || cargarLista(palabras).isEmpty() || !cargarLista(palabras).remove(palabra.toUpperCase())){
+    if(cargarLista(palabras)==null || cargarLista(palabras).isEmpty() || !cargarLista(palabras).remove(palabra.toUpperCase())){
             return false;
         }else{
             p.delete();
-             try {
-                 p.createNewFile();
-             } catch (IOException ex) {
-                 Logger.getLogger(MotorFichero.class.getName()).log(Level.SEVERE, null, ex);
-             }
+        try {
+            p.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(MotorFichero.class.getName()).log(Level.SEVERE, null, ex);
+        }
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(p, true))){
             for(String st : palabras){
                  bw.append(st.toUpperCase() + "\n");

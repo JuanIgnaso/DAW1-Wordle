@@ -79,7 +79,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
         anadirPalabrajPanel.setBackground(new java.awt.Color(204, 204, 204));
 
-        addPalabrajTextField.setPreferredSize(new java.awt.Dimension(120, 20));
+        addPalabrajTextField.setPreferredSize(new java.awt.Dimension(120, 24));
         addPalabrajTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPalabrajTextFieldActionPerformed(evt);
@@ -131,7 +131,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
 
         borrarjPanel.setBackground(new java.awt.Color(204, 204, 204));
 
-        borrarjTextField.setPreferredSize(new java.awt.Dimension(120, 20));
+        borrarjTextField.setPreferredSize(new java.awt.Dimension(120, 24));
         borrarjPanel.add(borrarjTextField);
 
         borrarButton.setBackground(new java.awt.Color(204, 204, 204));
@@ -184,7 +184,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
           addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
           addErrorjLabel1.setText("La palabra no es valida.");
           this.addPalabrajTextField.setText(null);
-      }else if(motorEsp.existePalabra(this.addPalabrajTextField.getText())){
+      }else if(motorEsp.existePalabra(this.addPalabrajTextField.getText().toUpperCase())){
             addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
           addErrorjLabel1.setText("La palabra ya existe.");
           this.addPalabrajTextField.setText(null);
@@ -202,7 +202,16 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addPalabrajTextFieldActionPerformed
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-        // TODO add your handling code here:
+        if(!motorEsp.removePalabra(this.borrarjTextField.getText())){
+            this.errorBorrarjLabel.setForeground(new java.awt.Color(255,0,0));
+            this.errorBorrarjLabel.setText("La palabra insertada no existe.");
+            this.borrarjTextField.setText(null);
+            
+        }else{
+            this.errorBorrarjLabel.setForeground(new java.awt.Color(0,153,0));
+            this.errorBorrarjLabel.setText("Palabra borrada con exito.");  
+            this.borrarjTextField.setText(null);
+        }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
     private void addErrorjLabel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_addErrorjLabel1AncestorAdded
