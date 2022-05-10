@@ -23,9 +23,9 @@ public class MainGUI extends javax.swing.JFrame {
     protected static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
     protected static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
-    private Set<Character>LETRAS_MAL=new TreeSet<>();
-    private Set<Character>LETRAS_CONTIENE=new TreeSet<>();
-    private Set<Character>LETRAS_BIEN=new TreeSet<>();
+    private Set<String>LETRAS_MAL=new TreeSet<>();
+    private Set<String>LETRAS_CONTIENE=new TreeSet<>();
+    private Set<String>LETRAS_BIEN=new TreeSet<>();
     
      private  String palabraDia;
     private static int INTENTOS = 0;
@@ -56,6 +56,7 @@ public class MainGUI extends javax.swing.JFrame {
                 JLabel jLabel = label[j];
                 jLabel.setText(null);
                 jLabel.setVisible(false);
+                jLabel.setForeground(new java.awt.Color(0,0,0));
             }
         }
     }
@@ -63,12 +64,25 @@ public class MainGUI extends javax.swing.JFrame {
     //AFECTA A FILA PASADA POR PARAMETRO
     public void testfila(int num){
         JLabel[] label = labels[num];
-        for (int j = 0; j < palabraDia.length(); j++) {
+        for (int j = 0; j < TAMANO_PALABRA; j++) {
             JLabel jLabel = label[j];
-            char actual = palabraDia.charAt(j);
-            jLabel.setText(actual + "");
+            String actual = palabraDia.charAt(j)+"";
+            jLabel.setText((this.palabraTextField.getText().charAt(j)+"").toUpperCase());
             jLabel.setVisible(true);
-            jLabel.setForeground(COLOR_ROJO);
+            if(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()).equals(actual)){
+                jLabel.setForeground(COLOR_VERDE);
+                LETRAS_BIEN.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+            }
+            if(palabraDia.contains((this.palabraTextField.getText().charAt(j)+"").toUpperCase()) && !((this.palabraTextField.getText().charAt(j)+"").toUpperCase()).equals(actual)){
+                jLabel.setForeground(COLOR_AMARILLO);
+            }
+            
+          if(!palabraDia.contains((this.palabraTextField.getText().charAt(j)+"").toUpperCase())){
+                jLabel.setForeground(COLOR_ROJO);
+                LETRAS_MAL.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+            }
+          
+            
            
         }
     }
@@ -468,7 +482,16 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-         if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
+        if(!LETRAS_BIEN.isEmpty()){
+            this.bienjLabel.setVisible(true);
+            this.bienjLabel.setText(LETRAS_BIEN.toString());
+        }
+        if(!LETRAS_MAL.isEmpty()){
+            this.malLabel.setVisible(true);
+            this.malLabel.setText(LETRAS_MAL.toString());
+        }
+        
+        if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
             this.palabraTextField.setText(null);
