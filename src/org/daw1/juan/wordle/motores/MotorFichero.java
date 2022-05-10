@@ -29,12 +29,13 @@ import java.util.logging.Logger;
  */
 public class MotorFichero implements IMotor {
      private int LARGO_FICHER0;
-     private static final  File p = new File(Paths.get(".").toAbsolutePath().normalize().toString() + File.separator + "palabras.txt");
-     private static List<String>palabras; 
+     private static final  File p = new File(Paths.get(".").toAbsolutePath().normalize().toString() + File.separator + "data" + File.separator + "palabras.txt");
+     private  List<String>palabras; 
 
     public MotorFichero() {
         palabras = new ArrayList<>();
         LARGO_FICHER0 = lineasFichero();
+        cargarLista(palabras);
     }
      
 

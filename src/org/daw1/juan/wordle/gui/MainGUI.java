@@ -7,6 +7,7 @@ package org.daw1.juan.wordle.gui;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JLabel;
 import org.daw1.juan.wordle.motores.*;
 
@@ -38,22 +39,16 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
-        LETRAS_MAL.add('A');
-        LETRAS_MAL.add('B');
-         LETRAS_CONTIENE.add('A');
-        LETRAS_BIEN.add('D');
-        LETRAS_BIEN.add('F');
-        motor = new MotorTest();
-        motor.obtenerPalabraAleatoria();
+        motor = new MotorFichero();
         initComponents();
-         inicializarLabels();
-         
-    
+        inicializarLabels();
+        motor.obtenerPalabraAleatoria();
+        ocultarLabels();
     }
     
   
         //AFECTA A TODAS
-        public void test(){
+        public void ocultarLabels(){
         for(int i = 0; i < labels.length; i++){
             JLabel[] label = labels[i];
             for(int j = 0; j < label.length; j++){
@@ -64,11 +59,15 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     //AFECTA A FILA PASADA POR PARAMETRO
-    public void test(int num){
+    public void testfila(int num){
         JLabel[] label = labels[num];
-        for (int j = 0; j < label.length; j++) {
+        for (int j = 0; j < motor.obtenerPalabraAleatoria().length(); j++) {
             JLabel jLabel = label[j];
+            char actual = motor.obtenerPalabraAleatoria().charAt(j);
+            jLabel.setText(actual + "");
+            jLabel.setVisible(true);
             jLabel.setForeground(COLOR_ROJO);
+           
         }
     }
     
@@ -155,6 +154,7 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2 = new javax.swing.JMenu();
         motorTestjRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
+        backgroundjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DAW1 Wordle Juan");
@@ -408,7 +408,6 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         motoresButtonGroup.add(motorTestjRadioButton);
-        motorTestjRadioButton.setSelected(true);
         motorTestjRadioButton.setText("Motor Test");
         motorTestjRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,6 +417,7 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.add(motorTestjRadioButton);
 
         motoresButtonGroup.add(motorFicherojRadioButton);
+        motorFicherojRadioButton.setSelected(true);
         motorFicherojRadioButton.setText("Motor Esp");
         motorFicherojRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,6 +427,12 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.add(motorFicherojRadioButton);
 
         menuSuperiorjMenuBar.add(motoresjMenu2);
+
+        backgroundjMenu.setBackground(new java.awt.Color(204, 204, 204));
+        backgroundjMenu.setForeground(new java.awt.Color(0, 0, 0));
+        backgroundjMenu.setText("Interfaz");
+        backgroundjMenu.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        menuSuperiorjMenuBar.add(backgroundjMenu);
 
         setJMenuBar(menuSuperiorjMenuBar);
 
@@ -445,7 +451,19 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-        
+         if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
+            errorjLabel.setVisible(true);
+            errorjLabel.setText("Largo de palabra incorrecto.");
+            this.palabraTextField.setText(null);
+         }else if(!motor.existePalabra(this.palabraTextField.getText())){
+            errorjLabel.setVisible(true);
+            errorjLabel.setText("La palabra no existe.");
+            this.palabraTextField.setText(null);
+         }else{          
+             testfila(INTENTOS);
+             INTENTOS++;
+             this.palabraTextField.setText(null);
+         }
     }//GEN-LAST:event_enviarButtonActionPerformed
 
     private void motorTestjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestjRadioButtonActionPerformed
@@ -510,6 +528,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel MainjPanel;
     private javax.swing.JPanel ZonaLetrasjPanel;
     private javax.swing.JMenu archivojMenu1;
+    private javax.swing.JMenu backgroundjMenu;
     private javax.swing.JLabel bienjLabel;
     private javax.swing.JPanel bienjPanel;
     private javax.swing.JButton enviarButton;
