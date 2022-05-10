@@ -26,6 +26,7 @@ public class MainGUI extends javax.swing.JFrame {
     private Set<Character>LETRAS_CONTIENE=new TreeSet<>();
     private Set<Character>LETRAS_BIEN=new TreeSet<>();
     
+    
     private static int INTENTOS = 0;
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
@@ -43,8 +44,10 @@ public class MainGUI extends javax.swing.JFrame {
         LETRAS_BIEN.add('D');
         LETRAS_BIEN.add('F');
         motor = new MotorTest();
+        motor.obtenerPalabraAleatoria();
         initComponents();
          inicializarLabels();
+         
     
     }
     
