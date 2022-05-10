@@ -27,7 +27,7 @@ public class MainGUI extends javax.swing.JFrame {
     private Set<Character>LETRAS_CONTIENE=new TreeSet<>();
     private Set<Character>LETRAS_BIEN=new TreeSet<>();
     
-    
+     private  String palabraDia;
     private static int INTENTOS = 0;
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
@@ -44,6 +44,7 @@ public class MainGUI extends javax.swing.JFrame {
         inicializarLabels();
         motor.obtenerPalabraAleatoria();
         ocultarLabels();
+        palabraDia  =  motor.obtenerPalabraAleatoria();
     }
     
   
@@ -53,6 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
             JLabel[] label = labels[i];
             for(int j = 0; j < label.length; j++){
                 JLabel jLabel = label[j];
+                jLabel.setText(null);
                 jLabel.setVisible(false);
             }
         }
@@ -61,9 +63,9 @@ public class MainGUI extends javax.swing.JFrame {
     //AFECTA A FILA PASADA POR PARAMETRO
     public void testfila(int num){
         JLabel[] label = labels[num];
-        for (int j = 0; j < motor.obtenerPalabraAleatoria().length(); j++) {
+        for (int j = 0; j < palabraDia.length(); j++) {
             JLabel jLabel = label[j];
-            char actual = motor.obtenerPalabraAleatoria().charAt(j);
+            char actual = palabraDia.charAt(j);
             jLabel.setText(actual + "");
             jLabel.setVisible(true);
             jLabel.setForeground(COLOR_ROJO);
@@ -151,6 +153,7 @@ public class MainGUI extends javax.swing.JFrame {
         errorjLabel = new javax.swing.JLabel();
         menuSuperiorjMenuBar = new javax.swing.JMenuBar();
         archivojMenu1 = new javax.swing.JMenu();
+        ReiniciarjRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         motoresjMenu2 = new javax.swing.JMenu();
         motorTestjRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
@@ -400,6 +403,20 @@ public class MainGUI extends javax.swing.JFrame {
         archivojMenu1.setForeground(new java.awt.Color(51, 51, 51));
         archivojMenu1.setText("Archivo");
         archivojMenu1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        archivojMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                archivojMenu1ActionPerformed(evt);
+            }
+        });
+
+        ReiniciarjRadioButtonMenuItem1.setText("Nueva Partida");
+        ReiniciarjRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReiniciarjRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        archivojMenu1.add(ReiniciarjRadioButtonMenuItem1);
+
         menuSuperiorjMenuBar.add(archivojMenu1);
 
         motoresjMenu2.setBackground(new java.awt.Color(204, 204, 204));
@@ -455,7 +472,7 @@ public class MainGUI extends javax.swing.JFrame {
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
             this.palabraTextField.setText(null);
-         }else if(!motor.existePalabra(this.palabraTextField.getText())){
+         }else if(!motor.existePalabra(this.palabraTextField.getText().toUpperCase())){
             errorjLabel.setVisible(true);
             errorjLabel.setText("La palabra no existe.");
             this.palabraTextField.setText(null);
@@ -473,6 +490,26 @@ public class MainGUI extends javax.swing.JFrame {
     private void motorFicherojRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorFicherojRadioButtonActionPerformed
        seleccionarMotor();
     }//GEN-LAST:event_motorFicherojRadioButtonActionPerformed
+
+    private void archivojMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivojMenu1ActionPerformed
+          
+       
+           
+            
+       
+    }//GEN-LAST:event_archivojMenu1ActionPerformed
+
+    private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
+       if(this.isActive()){
+            INTENTOS = 0;
+            ocultarLabels();
+            palabraDia = motor.obtenerPalabraAleatoria();
+            LETRAS_BIEN.clear();
+            LETRAS_CONTIENE.clear();
+            LETRAS_MAL.clear();      
+           
+       }
+    }//GEN-LAST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
 
     
     private void seleccionarMotor(){
@@ -526,6 +563,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel ExitojPanel;
     private javax.swing.JPanel JuegoInputjPanel;
     private javax.swing.JPanel MainjPanel;
+    private javax.swing.JRadioButtonMenuItem ReiniciarjRadioButtonMenuItem1;
     private javax.swing.JPanel ZonaLetrasjPanel;
     private javax.swing.JMenu archivojMenu1;
     private javax.swing.JMenu backgroundjMenu;
