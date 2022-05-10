@@ -492,22 +492,21 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_motorFicherojRadioButtonActionPerformed
 
     private void archivojMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivojMenu1ActionPerformed
-          
-       
            
-            
-       
     }//GEN-LAST:event_archivojMenu1ActionPerformed
 
-    private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
-       if(this.isActive()){
-            INTENTOS = 0;
+    private void reiniciarPartida(){
+        INTENTOS = 0;
             ocultarLabels();
             palabraDia = motor.obtenerPalabraAleatoria();
             LETRAS_BIEN.clear();
             LETRAS_CONTIENE.clear();
             LETRAS_MAL.clear();      
-           
+    }
+    
+    private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
+       if(this.isActive()){
+            reiniciarPartida();       
        }
     }//GEN-LAST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
 
@@ -515,9 +514,11 @@ public class MainGUI extends javax.swing.JFrame {
     private void seleccionarMotor(){
          if(this.motorTestjRadioButton.isSelected()){
             motor = new MotorTest();
+            reiniciarPartida();
              this.errorjLabel.setText("Se ha seleccionado el motor Test.");
         }else if(this.motorFicherojRadioButton.isSelected()){
            motor = new MotorFichero();
+           reiniciarPartida();
            this.errorjLabel.setText("Se ha seleccionado el motor Español.");
        }
         
