@@ -33,7 +33,14 @@ public class MainGUI extends javax.swing.JFrame {
     private static final int TAMANO_PALABRA = 5;
     
     private final javax.swing.JLabel[][] labels = new javax.swing.JLabel[MAX_INTENTOS][TAMANO_PALABRA];
-        
+    
+    private String printarSets(Set<String>s){
+        if(!s.isEmpty()){
+            return s.toString();
+        }else{
+            return null;
+        }
+    }
     
     /**
      * Creates new form MainGUI
@@ -45,6 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
         motor.obtenerPalabraAleatoria();
         ocultarLabels();
         palabraDia  =  motor.obtenerPalabraAleatoria();
+        
     }
     
   
@@ -482,15 +490,7 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-        if(!LETRAS_BIEN.isEmpty()){
-            this.bienjLabel.setVisible(true);
-            this.bienjLabel.setText(LETRAS_BIEN.toString());
-        }
-        if(!LETRAS_MAL.isEmpty()){
-            this.malLabel.setVisible(true);
-            this.malLabel.setText(LETRAS_MAL.toString());
-        }
-        
+               
         if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
@@ -499,10 +499,18 @@ public class MainGUI extends javax.swing.JFrame {
             errorjLabel.setVisible(true);
             errorjLabel.setText("La palabra no existe.");
             this.palabraTextField.setText(null);
-         }else{          
+         }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS <= 5){          
+             this.finaljLabel.setText("Enhorabuena, has ganado!");
+             testfila(INTENTOS);
+             errorjLabel.setText("");
+             this.enviarButton.invalidate();
+             this.palabraTextField.setText(null);
+             this.palabraTextField.invalidate();
+         }else{
              testfila(INTENTOS);
              INTENTOS++;
              this.palabraTextField.setText(null);
+              errorjLabel.setText("");
          }
     }//GEN-LAST:event_enviarButtonActionPerformed
 
@@ -524,7 +532,10 @@ public class MainGUI extends javax.swing.JFrame {
             palabraDia = motor.obtenerPalabraAleatoria();
             LETRAS_BIEN.clear();
             LETRAS_CONTIENE.clear();
-            LETRAS_MAL.clear();      
+            LETRAS_MAL.clear();  
+             this.finaljLabel.setText("");
+             this.palabraTextField.setText(null);
+             errorjLabel.setText("");
     }
     
     private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
@@ -538,11 +549,11 @@ public class MainGUI extends javax.swing.JFrame {
          if(this.motorTestjRadioButton.isSelected()){
             motor = new MotorTest();
             reiniciarPartida();
-             this.errorjLabel.setText("Se ha seleccionado el motor Test.");
+             this.errorjLabel.setText("Seleccionado el motor Test.");
         }else if(this.motorFicherojRadioButton.isSelected()){
            motor = new MotorFichero();
            reiniciarPartida();
-           this.errorjLabel.setText("Se ha seleccionado el motor Español.");
+           this.errorjLabel.setText("Seleccionado el motor Español.");
        }
         
     }
