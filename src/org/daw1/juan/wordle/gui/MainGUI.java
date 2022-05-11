@@ -20,12 +20,12 @@ public class MainGUI extends javax.swing.JFrame {
     private IMotor motor;
 
     protected static final java.awt.Color COLOR_VERDE = new java.awt.Color(0,153,0);
-    protected static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
+    protected static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(255,153,51);
     protected static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
     
-    private Set<String>LETRAS_MAL=new TreeSet<>();
-    private Set<String>LETRAS_CONTIENE=new TreeSet<>();
-    private Set<String>LETRAS_BIEN=new TreeSet<>();
+    private Set <String> LETRAS_MAL = new TreeSet<>();
+    private Set <String>LETRAS_CONTIENE=new TreeSet<>();
+    private Set <String> LETRAS_BIEN = new TreeSet<>();
     
      private  String palabraDia;
     private static int INTENTOS = 0;
@@ -34,13 +34,7 @@ public class MainGUI extends javax.swing.JFrame {
     
     private final javax.swing.JLabel[][] labels = new javax.swing.JLabel[MAX_INTENTOS][TAMANO_PALABRA];
     
-    private String printarSets(Set<String>s){
-        if(!s.isEmpty()){
-            return s.toString();
-        }else{
-            return null;
-        }
-    }
+
     
     /**
      * Creates new form MainGUI
@@ -52,7 +46,10 @@ public class MainGUI extends javax.swing.JFrame {
         motor.obtenerPalabraAleatoria();
         ocultarLabels();
         palabraDia  =  motor.obtenerPalabraAleatoria();
-        
+        this.bienjLabel.setVisible(true);
+        this.existenLabel.setVisible(true);
+        this.malLabel.setVisible(true);
+       
     }
     
   
@@ -79,15 +76,25 @@ public class MainGUI extends javax.swing.JFrame {
             jLabel.setVisible(true);
             if(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()).equals(actual)){
                 jLabel.setForeground(COLOR_VERDE);
-                LETRAS_BIEN.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+                this.bienjLabel.setVisible(true);
+                LETRAS_BIEN.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase())); 
+                this.bienjLabel.setText(mostrarLetras(LETRAS_BIEN));
+                                  
             }
             if(palabraDia.contains((this.palabraTextField.getText().charAt(j)+"").toUpperCase()) && !((this.palabraTextField.getText().charAt(j)+"").toUpperCase()).equals(actual)){
                 jLabel.setForeground(COLOR_AMARILLO);
+                this.existenLabel.setVisible(true);
+                LETRAS_CONTIENE.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+                this.existenLabel.setText(mostrarLetras(LETRAS_CONTIENE));
+
             }
             
           if(!palabraDia.contains((this.palabraTextField.getText().charAt(j)+"").toUpperCase())){
                 jLabel.setForeground(COLOR_ROJO);
+                this.malLabel.setVisible(true);
                 LETRAS_MAL.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+                this.malLabel.setText(mostrarLetras(LETRAS_MAL));
+                
             }
           
             
@@ -95,7 +102,16 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
     
-    
+    private String mostrarLetras(Set<String>set){
+        StringBuilder sb = new StringBuilder("");
+        if(!set.isEmpty()){                
+            for(String s : set){
+                sb.append(" "+ s + " ");
+            }
+        }
+           
+        return sb.toString();
+    }
 
 
 
@@ -365,7 +381,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         existenLabel.setBackground(new java.awt.Color(204, 204, 204));
         existenLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        existenLabel.setForeground(new java.awt.Color(204, 204, 0));
+        existenLabel.setForeground(new java.awt.Color(255, 153, 51));
         existenjPanel.add(existenLabel);
 
         estadoActualjPanel.add(existenjPanel);
@@ -492,6 +508,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
                
         if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
+           
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
             this.palabraTextField.setText(null);
@@ -503,7 +520,7 @@ public class MainGUI extends javax.swing.JFrame {
              this.finaljLabel.setText("Enhorabuena, has ganado!");
              testfila(INTENTOS);
              errorjLabel.setText("");
-             this.enviarButton.invalidate();
+             this.enviarButton.setEnabled(false);
              this.palabraTextField.setText(null);
              this.palabraTextField.invalidate();
          }else{
@@ -532,10 +549,14 @@ public class MainGUI extends javax.swing.JFrame {
             palabraDia = motor.obtenerPalabraAleatoria();
             LETRAS_BIEN.clear();
             LETRAS_CONTIENE.clear();
-            LETRAS_MAL.clear();  
+            LETRAS_MAL.clear(); 
+            this.existenLabel.setText("");
+            this.malLabel.setText("");
+            this.bienjLabel.setText("");
              this.finaljLabel.setText("");
              this.palabraTextField.setText(null);
              errorjLabel.setText("");
+             enviarButton.setEnabled(true);
     }
     
     private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
