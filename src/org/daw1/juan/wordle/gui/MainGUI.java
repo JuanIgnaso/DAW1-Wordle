@@ -49,6 +49,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.bienjLabel.setVisible(true);
         this.existenLabel.setVisible(true);
         this.malLabel.setVisible(true);
+      
        
     }
     
@@ -507,16 +508,21 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
                
-        if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){
-           
+        if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){           
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
             this.palabraTextField.setText(null);
-         }else if(!motor.existePalabra(this.palabraTextField.getText().toUpperCase())){
+         }else if(!motor.existePalabra(this.palabraTextField.getText().toUpperCase())){ //SI LA PALABRA INTRODUCIDA NO EXISTE EN EL DICCIONARIO
             errorjLabel.setVisible(true);
             errorjLabel.setText("La palabra no existe.");
             this.palabraTextField.setText(null);
-         }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS <= 5){          
+         }else if(INTENTOS == 5 && !(this.palabraTextField.getText().toUpperCase()).equals(palabraDia)){ //SI HA AGOTADO TODOS LOS INTENTOS
+            testfila(INTENTOS);
+            this.enviarButton.setEnabled(false);
+            this.finaljLabel.setForeground(COLOR_ROJO);           
+            this.finaljLabel.setText("Has Perdido, Intentar Otra vez?.");       
+         }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS < MAX_INTENTOS){ 
+             this.finaljLabel.setForeground(COLOR_VERDE);
              this.finaljLabel.setText("Enhorabuena, has ganado!");
              testfila(INTENTOS);
              errorjLabel.setText("");
