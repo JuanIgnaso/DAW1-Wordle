@@ -13,12 +13,13 @@ import org.daw1.juan.wordle.motores.*;
  */
 public class ConfiguracionGUI extends javax.swing.JFrame {
 
-    private IMotor motorEsp = new MotorFichero();
+    private IMotor motor; 
     /**
      * Creates new form ConfiguracionGUI
      */
     public ConfiguracionGUI() {
         initComponents();
+        motor = new MotorFichero();
     }
 
     
@@ -184,12 +185,12 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
           addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
           addErrorjLabel1.setText("La palabra no es valida.");
           this.addPalabrajTextField.setText(null);
-      }else if(motorEsp.existePalabra(this.addPalabrajTextField.getText().toUpperCase())){
+      }else if(motor.existePalabra(this.addPalabrajTextField.getText().toUpperCase())){
             addErrorjLabel1.setForeground(new java.awt.Color(255,0,0));
           addErrorjLabel1.setText("La palabra ya existe.");
           this.addPalabrajTextField.setText(null);
       }else{
-         motorEsp.addPalabra(this.addPalabrajTextField.getText()); 
+         motor.addPalabra(this.addPalabrajTextField.getText()); 
          this.addPalabrajTextField.setText(null);
           addErrorjLabel1.setForeground(new java.awt.Color(0,153,0));
          addErrorjLabel1.setText("Palabra añadida con exito.");
@@ -202,7 +203,7 @@ public class ConfiguracionGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addPalabrajTextFieldActionPerformed
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-        if(!motorEsp.removePalabra(this.borrarjTextField.getText())){
+        if(!motor.removePalabra(this.borrarjTextField.getText())){
             this.errorBorrarjLabel.setForeground(new java.awt.Color(255,0,0));
             this.errorBorrarjLabel.setText("La palabra insertada no existe.");
             this.borrarjTextField.setText(null);
