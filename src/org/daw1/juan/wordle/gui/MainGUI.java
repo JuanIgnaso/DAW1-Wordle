@@ -196,6 +196,8 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2 = new javax.swing.JMenu();
         motorTestjRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
+        motorBDesjRadioButton = new javax.swing.JRadioButtonMenuItem();
+        motorBDgljRadioButton = new javax.swing.JRadioButtonMenuItem();
         backgroundjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -462,6 +464,11 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.setForeground(new java.awt.Color(51, 51, 51));
         motoresjMenu2.setText("Motores");
         motoresjMenu2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        motoresjMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motoresjMenu2ActionPerformed(evt);
+            }
+        });
 
         motoresButtonGroup.add(motorTestjRadioButton);
         motorTestjRadioButton.setText("Motor Test");
@@ -474,13 +481,31 @@ public class MainGUI extends javax.swing.JFrame {
 
         motoresButtonGroup.add(motorFicherojRadioButton);
         motorFicherojRadioButton.setSelected(true);
-        motorFicherojRadioButton.setText("Motor Esp");
+        motorFicherojRadioButton.setText("Motor Fichero");
         motorFicherojRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 motorFicherojRadioButtonActionPerformed(evt);
             }
         });
         motoresjMenu2.add(motorFicherojRadioButton);
+
+        motoresButtonGroup.add(motorBDesjRadioButton);
+        motorBDesjRadioButton.setText("Motor Castellano");
+        motorBDesjRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorBDesjRadioButtonActionPerformed(evt);
+            }
+        });
+        motoresjMenu2.add(motorBDesjRadioButton);
+
+        motoresButtonGroup.add(motorBDgljRadioButton);
+        motorBDgljRadioButton.setText("Motor Galego");
+        motorBDgljRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorBDgljRadioButtonActionPerformed(evt);
+            }
+        });
+        motoresjMenu2.add(motorBDgljRadioButton);
 
         menuSuperiorjMenuBar.add(motoresjMenu2);
 
@@ -571,16 +596,39 @@ public class MainGUI extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
 
+    private void motoresjMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motoresjMenu2ActionPerformed
+        seleccionarMotor();
+    }//GEN-LAST:event_motoresjMenu2ActionPerformed
+
+    private void motorBDesjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorBDesjRadioButtonActionPerformed
+        seleccionarMotor();
+    }//GEN-LAST:event_motorBDesjRadioButtonActionPerformed
+
+    private void motorBDgljRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorBDgljRadioButtonActionPerformed
+        seleccionarMotor();
+    }//GEN-LAST:event_motorBDgljRadioButtonActionPerformed
+
     
     private void seleccionarMotor(){
          if(this.motorTestjRadioButton.isSelected()){
             motor = new MotorTest();
             reiniciarPartida();
              this.errorjLabel.setText("Seleccionado el motor Test.");
-        }else if(this.motorFicherojRadioButton.isSelected()){
+        }
+         if(this.motorFicherojRadioButton.isSelected()){
            motor = new MotorFichero();
            reiniciarPartida();
+           this.errorjLabel.setText("Seleccionado el motor Fichero.");
+       } 
+         if(this.motorBDesjRadioButton.isSelected()){
+           motor = new MotorBDes();
+           reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Español.");
+       }
+         if(this.motorBDgljRadioButton.isSelected()){
+           motor = new MotorBDgl();
+           reiniciarPartida();
+           this.errorjLabel.setText("Seleccionado el motor Galego.");
        }
         
     }
@@ -670,6 +718,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel malLabel;
     private javax.swing.JPanel maljPanel;
     private javax.swing.JMenuBar menuSuperiorjMenuBar;
+    private javax.swing.JRadioButtonMenuItem motorBDesjRadioButton;
+    private javax.swing.JRadioButtonMenuItem motorBDgljRadioButton;
     private javax.swing.JRadioButtonMenuItem motorFicherojRadioButton;
     private javax.swing.JRadioButtonMenuItem motorTestjRadioButton;
     private javax.swing.ButtonGroup motoresButtonGroup;
