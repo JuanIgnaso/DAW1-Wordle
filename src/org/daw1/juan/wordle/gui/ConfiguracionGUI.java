@@ -12,12 +12,13 @@ import org.daw1.juan.wordle.motores.*;
  * @author alumno
  */
 public class ConfiguracionGUI extends javax.swing.JFrame {
-
+   
     private IMotor motor; 
     /**
      * Creates new form ConfiguracionGUI
      */
-    public ConfiguracionGUI() {
+    public ConfiguracionGUI(){
+        this.motor = motor;
         initComponents();
         motor = new MotorFichero();
     }

@@ -40,16 +40,17 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
-        motor = new MotorFichero();
+        this.motor = motor;
         initComponents();
         inicializarLabels();
-        motor.obtenerPalabraAleatoria();
         ocultarLabels();
-        palabraDia  =  motor.obtenerPalabraAleatoria();
         this.bienjLabel.setVisible(true);
         this.existenLabel.setVisible(true);
         this.malLabel.setVisible(true);
-      
+        this.enviarButton.setEnabled(false);
+         this.finaljLabel.setForeground(COLOR_VERDE);
+         this.finaljLabel.setText("Escoje un Motor de Palabras.");
+        
        
     }
     
@@ -612,21 +613,29 @@ public class MainGUI extends javax.swing.JFrame {
     private void seleccionarMotor(){
          if(this.motorTestjRadioButton.isSelected()){
             motor = new MotorTest();
+            motor.obtenerPalabraAleatoria();
+            palabraDia  =  motor.obtenerPalabraAleatoria();
             reiniciarPartida();
              this.errorjLabel.setText("Seleccionado el motor Test.");
         }
          if(this.motorFicherojRadioButton.isSelected()){
            motor = new MotorFichero();
+           motor.obtenerPalabraAleatoria();
+           palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Fichero.");
        } 
          if(this.motorBDesjRadioButton.isSelected()){
            motor = new MotorBDes();
+           motor.obtenerPalabraAleatoria();
+           palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Español.");
        }
          if(this.motorBDgljRadioButton.isSelected()){
            motor = new MotorBDgl();
+           motor.obtenerPalabraAleatoria();
+           palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Galego.");
        }
