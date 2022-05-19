@@ -13,16 +13,27 @@ import org.daw1.juan.wordle.motores.*;
  */
 public class GestorMotorGUI extends javax.swing.JDialog {
 
-    private IMotor motor; 
+    private  IMotor motor; 
     /**
      * Creates new form GestorMotorGUI
      */
     public GestorMotorGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
         initComponents();
-        motor = new MotorFichero();
+        
+    }
+    
+      public GestorMotorGUI(java.awt.Frame parent, boolean modal,IMotor motor) {
+        super(parent, modal);
+        this.motor = motor;
+        initComponents();
+        
     }
 
+    private IMotor getMotor(){
+        return this.motor;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

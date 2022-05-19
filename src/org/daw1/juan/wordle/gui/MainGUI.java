@@ -199,6 +199,7 @@ public class MainGUI extends javax.swing.JFrame {
         motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorBDesjRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorBDgljRadioButton = new javax.swing.JRadioButtonMenuItem();
+        configjMenuItem = new javax.swing.JMenuItem();
         backgroundjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -508,6 +509,14 @@ public class MainGUI extends javax.swing.JFrame {
         });
         motoresjMenu2.add(motorBDgljRadioButton);
 
+        configjMenuItem.setText("Configurar Motor");
+        configjMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configjMenuItemActionPerformed(evt);
+            }
+        });
+        motoresjMenu2.add(configjMenuItem);
+
         menuSuperiorjMenuBar.add(motoresjMenu2);
 
         backgroundjMenu.setBackground(new java.awt.Color(204, 204, 204));
@@ -609,6 +618,12 @@ public class MainGUI extends javax.swing.JFrame {
         seleccionarMotor();
     }//GEN-LAST:event_motorBDgljRadioButtonActionPerformed
 
+    private void configjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configjMenuItemActionPerformed
+        GestorMotorGUI gestorMotor = new GestorMotorGUI(this,true,this.motor);
+        
+        gestorMotor.setVisible(true);
+    }//GEN-LAST:event_configjMenuItemActionPerformed
+
     
     private void seleccionarMotor(){
          if(this.motorTestjRadioButton.isSelected()){
@@ -626,14 +641,14 @@ public class MainGUI extends javax.swing.JFrame {
            this.errorjLabel.setText("Seleccionado el motor Fichero.");
        } 
          if(this.motorBDesjRadioButton.isSelected()){
-           motor = new MotorBDes();
+           motor = new MotorBD("es");
            motor.obtenerPalabraAleatoria();
            palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Español.");
        }
          if(this.motorBDgljRadioButton.isSelected()){
-           motor = new MotorBDgl();
+           motor = new MotorBD("gl");
            motor.obtenerPalabraAleatoria();
            palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
@@ -688,6 +703,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu backgroundjMenu;
     private javax.swing.JLabel bienjLabel;
     private javax.swing.JPanel bienjPanel;
+    private javax.swing.JMenuItem configjMenuItem;
     private javax.swing.JButton enviarButton;
     private javax.swing.JLabel errorjLabel;
     private javax.swing.JPanel estadoActualjPanel;
