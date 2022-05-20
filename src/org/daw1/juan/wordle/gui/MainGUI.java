@@ -57,7 +57,7 @@ public class MainGUI extends javax.swing.JFrame {
          this.finaljLabel.setForeground(COLOR_VERDE);
          this.finaljLabel.setText("Escoje un Motor de Palabras.");
          this.ReiniciarjRadioButtonMenuItem1.setEnabled(false);
-        
+        this.palabraTextField.setEnabled(false);
        
     }
     
@@ -510,7 +510,6 @@ public class MainGUI extends javax.swing.JFrame {
         motoresjMenu2.add(motorTestjRadioButton);
 
         motoresButtonGroup.add(motorFicherojRadioButton);
-        motorFicherojRadioButton.setSelected(true);
         motorFicherojRadioButton.setText("Motor Fichero");
         motorFicherojRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -607,14 +606,16 @@ public class MainGUI extends javax.swing.JFrame {
          }else if(INTENTOS == 5 && !(this.palabraTextField.getText().toUpperCase()).equals(palabraDia)){ //SI HA AGOTADO TODOS LOS INTENTOS
             testfila(INTENTOS);
             this.enviarButton.setEnabled(false);
+            this.palabraTextField.setEnabled(false);
             this.finaljLabel.setForeground(COLOR_ROJO);           
             this.finaljLabel.setText("Has Perdido, Intentar Otra vez?.");       
          }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS < MAX_INTENTOS){ 
              this.finaljLabel.setForeground(COLOR_VERDE);
-             this.finaljLabel.setText("Enhorabuena, has ganado!");
+             this.finaljLabel.setText("Has Ganado! Intentos" + INTENTOS);
              testfila(INTENTOS);
              errorjLabel.setText("");
              this.enviarButton.setEnabled(false);
+             this.palabraTextField.setEnabled(false);
              this.palabraTextField.setText(null);
              this.palabraTextField.invalidate();
          }else{
@@ -651,6 +652,7 @@ public class MainGUI extends javax.swing.JFrame {
              this.palabraTextField.setText(null);
              errorjLabel.setText("");
              enviarButton.setEnabled(true);
+             this.palabraTextField.setEnabled(true);
     }
     
     private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
@@ -756,6 +758,7 @@ public class MainGUI extends javax.swing.JFrame {
            this.errorjLabel.setText("Seleccionado el motor Galego.");
        }
         this.ReiniciarjRadioButtonMenuItem1.setEnabled(true);
+        this.palabraTextField.setEnabled(true);
     }
     /**
      * @param args the command line arguments
