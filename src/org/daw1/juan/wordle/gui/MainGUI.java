@@ -4,10 +4,12 @@
  */
 package org.daw1.juan.wordle.gui;
 
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.daw1.juan.wordle.motores.*;
 
@@ -22,6 +24,10 @@ public class MainGUI extends javax.swing.JFrame {
     protected static final java.awt.Color COLOR_VERDE = new java.awt.Color(0,153,0);
     protected static final java.awt.Color COLOR_AMARILLO = new java.awt.Color(255,153,51);
     protected static final java.awt.Color COLOR_ROJO = new java.awt.Color(255,0,0);
+    protected static final java.awt.Color COLOR_OSCURO = new java.awt.Color(51,51,51);
+    protected static final java.awt.Color COLOR_NORMAL = new java.awt.Color(204,204,204);
+    protected static final java.awt.Color COLOR_BLANCO = new java.awt.Color(255,255,255);
+
     
     private Set <String> LETRAS_MAL = new TreeSet<>();
     private Set <String>LETRAS_CONTIENE=new TreeSet<>();
@@ -50,6 +56,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.enviarButton.setEnabled(false);
          this.finaljLabel.setForeground(COLOR_VERDE);
          this.finaljLabel.setText("Escoje un Motor de Palabras.");
+         this.ReiniciarjRadioButtonMenuItem1.setEnabled(false);
         
        
     }
@@ -63,10 +70,12 @@ public class MainGUI extends javax.swing.JFrame {
                 JLabel jLabel = label[j];
                 jLabel.setText(null);
                 jLabel.setVisible(false);
-                jLabel.setForeground(new java.awt.Color(0,0,0));
+                jLabel.setForeground(COLOR_BLANCO);
             }
         }
     }
+        
+ 
     
     //AFECTA A FILA PASADA POR PARAMETRO
     public void testfila(int num){
@@ -144,6 +153,9 @@ public class MainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         motoresButtonGroup = new javax.swing.ButtonGroup();
+        InterfazbuttonGroup = new javax.swing.ButtonGroup();
+        ArchivobuttonGroup = new javax.swing.ButtonGroup();
+        jMenuItem1 = new javax.swing.JMenuItem();
         MainjPanel = new javax.swing.JPanel();
         ZonaLetrasjPanel = new javax.swing.JPanel();
         jLabel1_1 = new javax.swing.JLabel();
@@ -194,6 +206,7 @@ public class MainGUI extends javax.swing.JFrame {
         menuSuperiorjMenuBar = new javax.swing.JMenuBar();
         archivojMenu1 = new javax.swing.JMenu();
         ReiniciarjRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        Salir = new javax.swing.JRadioButtonMenuItem();
         motoresjMenu2 = new javax.swing.JMenu();
         motorTestjRadioButton = new javax.swing.JRadioButtonMenuItem();
         motorFicherojRadioButton = new javax.swing.JRadioButtonMenuItem();
@@ -201,9 +214,14 @@ public class MainGUI extends javax.swing.JFrame {
         motorBDgljRadioButton = new javax.swing.JRadioButtonMenuItem();
         configjMenuItem = new javax.swing.JMenuItem();
         backgroundjMenu = new javax.swing.JMenu();
+        NormaljRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        OscurojRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DAW1 Wordle Juan");
+        setPreferredSize(new java.awt.Dimension(500, 550));
 
         MainjPanel.setLayout(new java.awt.BorderLayout());
 
@@ -452,6 +470,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        ArchivobuttonGroup.add(ReiniciarjRadioButtonMenuItem1);
         ReiniciarjRadioButtonMenuItem1.setText("Nueva Partida");
         ReiniciarjRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,6 +478,15 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         archivojMenu1.add(ReiniciarjRadioButtonMenuItem1);
+
+        ArchivobuttonGroup.add(Salir);
+        Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
+        archivojMenu1.add(Salir);
 
         menuSuperiorjMenuBar.add(archivojMenu1);
 
@@ -523,6 +551,31 @@ public class MainGUI extends javax.swing.JFrame {
         backgroundjMenu.setForeground(new java.awt.Color(0, 0, 0));
         backgroundjMenu.setText("Interfaz");
         backgroundjMenu.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        backgroundjMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backgroundjMenuActionPerformed(evt);
+            }
+        });
+
+        InterfazbuttonGroup.add(NormaljRadioButtonMenuItem);
+        NormaljRadioButtonMenuItem.setSelected(true);
+        NormaljRadioButtonMenuItem.setText("Default");
+        NormaljRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NormaljRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        backgroundjMenu.add(NormaljRadioButtonMenuItem);
+
+        InterfazbuttonGroup.add(OscurojRadioButtonMenuItem2);
+        OscurojRadioButtonMenuItem2.setText("Oscuro");
+        OscurojRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OscurojRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
+        backgroundjMenu.add(OscurojRadioButtonMenuItem2);
+
         menuSuperiorjMenuBar.add(backgroundjMenu);
 
         setJMenuBar(menuSuperiorjMenuBar);
@@ -531,11 +584,11 @@ public class MainGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+            .addComponent(MainjPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
 
         pack();
@@ -622,8 +675,56 @@ public class MainGUI extends javax.swing.JFrame {
         GestorMotorGUI gestorMotor = new GestorMotorGUI(this,true,this.motor);
         
         gestorMotor.setVisible(true);
+        reiniciarPartida();
     }//GEN-LAST:event_configjMenuItemActionPerformed
 
+    private void backgroundjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backgroundjMenuActionPerformed
+        cambiarInterfaz();
+    }//GEN-LAST:event_backgroundjMenuActionPerformed
+
+    private void NormaljRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NormaljRadioButtonMenuItemActionPerformed
+       cambiarInterfaz();
+    }//GEN-LAST:event_NormaljRadioButtonMenuItemActionPerformed
+
+    private void OscurojRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OscurojRadioButtonMenuItem2ActionPerformed
+       cambiarInterfaz();
+    }//GEN-LAST:event_OscurojRadioButtonMenuItem2ActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        if(this.isActive()){
+            System.exit(0);
+        }
+        
+    }//GEN-LAST:event_SalirActionPerformed
+
+    private void cambiarInterfaz(){
+        if(this.NormaljRadioButtonMenuItem.isSelected()){
+            this.BottomjPanel.setBackground(COLOR_NORMAL);
+            this.estadoActualjPanel.setBackground(COLOR_NORMAL);
+            this.existenjPanel.setBackground(COLOR_NORMAL);
+            this.maljPanel.setBackground(COLOR_NORMAL);
+            this.ExitojPanel.setBackground(COLOR_NORMAL);
+            this.bienjPanel.setBackground(COLOR_NORMAL);
+            this.MainjPanel.setBackground(COLOR_NORMAL);
+            this.JuegoInputjPanel.setBackground(COLOR_NORMAL);
+            this.ErrorjPanel.setBackground(COLOR_NORMAL);
+
+
+        }
+        if(this.OscurojRadioButtonMenuItem2.isSelected()){
+            this.BottomjPanel.setBackground(COLOR_OSCURO);
+            this.estadoActualjPanel.setBackground(COLOR_OSCURO);
+            this.existenjPanel.setBackground(COLOR_OSCURO);
+            this.maljPanel.setBackground(COLOR_OSCURO);
+            this.ExitojPanel.setBackground(COLOR_OSCURO);
+            this.bienjPanel.setBackground(COLOR_OSCURO);
+            this.MainjPanel.setBackground(COLOR_OSCURO);
+            this.JuegoInputjPanel.setBackground(COLOR_OSCURO);
+            this.ErrorjPanel.setBackground(COLOR_OSCURO);
+
+
+        }
+    }
     
     private void seleccionarMotor(){
          if(this.motorTestjRadioButton.isSelected()){
@@ -654,7 +755,7 @@ public class MainGUI extends javax.swing.JFrame {
            reiniciarPartida();
            this.errorjLabel.setText("Seleccionado el motor Galego.");
        }
-        
+        this.ReiniciarjRadioButtonMenuItem1.setEnabled(true);
     }
     /**
      * @param args the command line arguments
@@ -692,12 +793,17 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup ArchivobuttonGroup;
     private javax.swing.JPanel BottomjPanel;
     private javax.swing.JPanel ErrorjPanel;
     private javax.swing.JPanel ExitojPanel;
+    private javax.swing.ButtonGroup InterfazbuttonGroup;
     private javax.swing.JPanel JuegoInputjPanel;
     private javax.swing.JPanel MainjPanel;
+    private javax.swing.JRadioButtonMenuItem NormaljRadioButtonMenuItem;
+    private javax.swing.JRadioButtonMenuItem OscurojRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem ReiniciarjRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem Salir;
     private javax.swing.JPanel ZonaLetrasjPanel;
     private javax.swing.JMenu archivojMenu1;
     private javax.swing.JMenu backgroundjMenu;
@@ -740,6 +846,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6_3;
     private javax.swing.JLabel jLabel6_4;
     private javax.swing.JLabel jLabel6_5;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel malLabel;
     private javax.swing.JPanel maljPanel;
     private javax.swing.JMenuBar menuSuperiorjMenuBar;

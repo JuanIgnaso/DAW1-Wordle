@@ -183,7 +183,7 @@ public class GestorMotorGUI extends javax.swing.JDialog {
           addErrorjLabel.setText("La palabra ya existe.");
           this.AddPalabraTextField.setText(null);
       }else{
-         motor.addPalabra(this.AddPalabraTextField.getText()); 
+         motor.addPalabra(this.AddPalabraTextField.getText().toUpperCase()); 
          this.AddPalabraTextField.setText(null);
          addErrorjLabel.setForeground(new java.awt.Color(0,153,0));
          addErrorjLabel.setText("Palabra añadida con exito.");
