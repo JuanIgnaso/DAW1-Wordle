@@ -126,6 +126,24 @@ public class MotorBD implements IMotor{
         }
         return 0;
     }
+
+    @Override
+    public boolean hayPalabras() {
+                 try(Connection conn = DriverManager.getConnection(URL);
+         java.sql.PreparedStatement statement = conn.prepareStatement("SELECT palabra FROM palabras WHERE lang = ?")){
+             statement.setString(1,this.LANG);
+             try(ResultSet rs = statement.executeQuery()){
+                 if(!rs.next()){
+                     return false;
+                 }else{
+                     return true;
+                 }
+             }
+         } catch (SQLException ex) {
+            Logger.getLogger(MotorBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return false;    
+    }
    
     
 }

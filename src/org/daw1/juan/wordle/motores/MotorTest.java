@@ -29,5 +29,10 @@ public class MotorTest implements IMotor {
     public boolean removePalabra(String palabra) {
         return true;
     }
+
+    @Override
+    public boolean hayPalabras() {
+        return true;
+    }
     
 }

@@ -677,7 +677,10 @@ public class MainGUI extends javax.swing.JFrame {
         GestorMotorGUI gestorMotor = new GestorMotorGUI(this,true,this.motor);
         
         gestorMotor.setVisible(true);
-        reiniciarPartida();
+        if(motor.hayPalabras()){
+        reiniciarPartida(); 
+        }
+     
     }//GEN-LAST:event_configjMenuItemActionPerformed
 
     private void backgroundjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backgroundjMenuActionPerformed
@@ -738,24 +741,44 @@ public class MainGUI extends javax.swing.JFrame {
         }
          if(this.motorFicherojRadioButton.isSelected()){
            motor = new MotorFichero();
+           if(!motor.hayPalabras()){
+               this.errorjLabel.setText("El Motor no contiene palabras.");
+             this.enviarButton.setEnabled(false);
+             this.palabraTextField.setEnabled(false);
+           }else{
            motor.obtenerPalabraAleatoria();
            palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
-           this.errorjLabel.setText("Seleccionado el motor Fichero.");
+           this.errorjLabel.setText("Seleccionado el motor Fichero."); 
+           }      
        } 
          if(this.motorBDesjRadioButton.isSelected()){
            motor = new MotorBD("es");
+           if(!motor.hayPalabras()){
+                this.errorjLabel.setText("El Motor no contiene palabras.");
+             this.enviarButton.setEnabled(false);
+             this.palabraTextField.setEnabled(false);
+           }else{
            motor.obtenerPalabraAleatoria();
            palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
-           this.errorjLabel.setText("Seleccionado el motor Español.");
+           this.errorjLabel.setText("Seleccionado el motor Español."); 
+           }
+
        }
          if(this.motorBDgljRadioButton.isSelected()){
            motor = new MotorBD("gl");
+           if(!motor.hayPalabras()){
+             this.errorjLabel.setText("El Motor no contiene palabras.");
+             this.enviarButton.setEnabled(false);
+             this.palabraTextField.setEnabled(false);  
+           }else{
            motor.obtenerPalabraAleatoria();
            palabraDia  =  motor.obtenerPalabraAleatoria();
            reiniciarPartida();
-           this.errorjLabel.setText("Seleccionado el motor Galego.");
+           this.errorjLabel.setText("Seleccionado el motor Galego.");  
+           }
+
        }
         this.ReiniciarjRadioButtonMenuItem1.setEnabled(true);
         this.palabraTextField.setEnabled(true);

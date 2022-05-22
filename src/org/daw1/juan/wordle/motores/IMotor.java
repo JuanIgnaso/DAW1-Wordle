@@ -19,4 +19,6 @@ public interface IMotor {
     public boolean addPalabra(String palabra);
     
     public boolean removePalabra(String palabra);
+    
+    public boolean hayPalabras();
 }

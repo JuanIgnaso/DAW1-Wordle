@@ -185,5 +185,14 @@ public class MotorFichero implements IMotor {
     public boolean checkPalabra(String txt){
          return txt.length() == 5 && Pattern.compile("[a-zA-Z]{5}").matcher(txt).matches();
     }
+
+    @Override
+    public boolean hayPalabras() {
+        if(!existeFichero() || LARGO_FICHER0 == 0){
+            return false;
+        }else{
+            return true;
+        }
     
+}
 }
