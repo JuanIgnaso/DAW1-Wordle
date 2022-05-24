@@ -95,8 +95,9 @@ public class MainGUI extends javax.swing.JFrame {
             if(palabraDia.contains((this.palabraTextField.getText().charAt(j)+"").toUpperCase()) && !((this.palabraTextField.getText().charAt(j)+"").toUpperCase()).equals(actual)){
                 jLabel.setForeground(COLOR_AMARILLO);
                 this.existenLabel.setVisible(true);
-                LETRAS_CONTIENE.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));
+                LETRAS_CONTIENE.add(((this.palabraTextField.getText().charAt(j)+"").toUpperCase()));               
                 this.existenLabel.setText(mostrarLetras(LETRAS_CONTIENE));
+               
 
             }
             
@@ -611,7 +612,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.finaljLabel.setText("Has Perdido, Intentar Otra vez?.");       
          }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS < MAX_INTENTOS){ 
              this.finaljLabel.setForeground(COLOR_VERDE);
-             this.finaljLabel.setText("Has Ganado! Intentos" + INTENTOS);
+             this.finaljLabel.setText("Has Ganado! Intentos" + (INTENTOS + 1));
              testfila(INTENTOS);
              errorjLabel.setText("");
              this.enviarButton.setEnabled(false);
@@ -624,6 +625,8 @@ public class MainGUI extends javax.swing.JFrame {
              this.palabraTextField.setText(null);
               errorjLabel.setText("");
          }
+        LETRAS_CONTIENE.removeAll(LETRAS_BIEN);
+        this.existenLabel.setText(mostrarLetras(LETRAS_CONTIENE));
     }//GEN-LAST:event_enviarButtonActionPerformed
 
     private void motorTestjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestjRadioButtonActionPerformed

@@ -5,6 +5,9 @@
 package org.daw1.juan.wordle.motores;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  *
@@ -21,4 +24,14 @@ public interface IMotor {
     public boolean removePalabra(String palabra);
     
     public boolean hayPalabras();
+    
+//        public boolean existePalabra(String palabra) throws SQLException,FileNotFoundException,IOException;
+//    
+//    public String obtenerPalabraAleatoria() throws SQLException;
+//    
+//    public boolean addPalabra(String palabra) throws SQLException,IOException;
+//    
+//    public boolean removePalabra(String palabra) throws SQLException,IOException;
+//    
+//    public boolean hayPalabras() throws SQLException;
 }
