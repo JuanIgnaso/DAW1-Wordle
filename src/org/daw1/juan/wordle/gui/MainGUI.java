@@ -5,12 +5,16 @@
 package org.daw1.juan.wordle.gui;
 
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import org.daw1.juan.wordle.motores.*;
 
 /**
@@ -595,7 +599,7 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarButtonActionPerformed
-               
+       try{        
         if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.palabraTextField.getText()).matches()){           
             errorjLabel.setVisible(true);
             errorjLabel.setText("Largo de palabra incorrecto.");
@@ -610,7 +614,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.palabraTextField.setEnabled(false);
             this.finaljLabel.setForeground(COLOR_ROJO);           
             this.finaljLabel.setText("Has Perdido, Intentar Otra vez?.");       
-         }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS < MAX_INTENTOS){ 
+         }else if((this.palabraTextField.getText().toUpperCase()).equals(palabraDia) && INTENTOS < MAX_INTENTOS){ //SI EL JUGADOR A GANADO
              this.finaljLabel.setForeground(COLOR_VERDE);
              this.finaljLabel.setText("Has Ganado! Intentos" + (INTENTOS + 1));
              testfila(INTENTOS);
@@ -619,7 +623,7 @@ public class MainGUI extends javax.swing.JFrame {
              this.palabraTextField.setEnabled(false);
              this.palabraTextField.setText(null);
              this.palabraTextField.invalidate();
-         }else{
+         }else{ //SI LA PALABRA INTRODUCIDA EXISTE DENTRO DEL MOTOR Y CUMPLE CON EL PARÁMETRO DE 5 LETRAS
              testfila(INTENTOS);
              INTENTOS++;
              this.palabraTextField.setText(null);
@@ -627,6 +631,13 @@ public class MainGUI extends javax.swing.JFrame {
          }
         LETRAS_CONTIENE.removeAll(LETRAS_BIEN);
         this.existenLabel.setText(mostrarLetras(LETRAS_CONTIENE));
+       }catch(SQLException | FileNotFoundException  ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());   
+     }
+       catch(IOException ex){
+        JOptionPane.showMessageDialog(this, "Error al leer el archivo" + ex.getMessage());
+
+       }
     }//GEN-LAST:event_enviarButtonActionPerformed
 
     private void motorTestjRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestjRadioButtonActionPerformed
@@ -641,7 +652,9 @@ public class MainGUI extends javax.swing.JFrame {
            
     }//GEN-LAST:event_archivojMenu1ActionPerformed
 
+    //METODO PARA REINICIAR EL JUEGO
     private void reiniciarPartida(){
+       try{
         INTENTOS = 0;
             ocultarLabels();
             palabraDia = motor.obtenerPalabraAleatoria();
@@ -656,6 +669,9 @@ public class MainGUI extends javax.swing.JFrame {
              errorjLabel.setText("");
              enviarButton.setEnabled(true);
              this.palabraTextField.setEnabled(true);
+       }catch(SQLException ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());   
+     }
     }
     
     private void ReiniciarjRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarjRadioButtonMenuItem1ActionPerformed
@@ -677,13 +693,17 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_motorBDgljRadioButtonActionPerformed
 
     private void configjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configjMenuItemActionPerformed
+       try{ 
         GestorMotorGUI gestorMotor = new GestorMotorGUI(this,true,this.motor);
         
         gestorMotor.setVisible(true);
         if(motor.hayPalabras()){
         reiniciarPartida(); 
         }
+       }catch(SQLException ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());
      
+     }
     }//GEN-LAST:event_configjMenuItemActionPerformed
 
     private void backgroundjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backgroundjMenuActionPerformed
@@ -735,6 +755,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     private void seleccionarMotor(){
+       try{
          if(this.motorTestjRadioButton.isSelected()){
             motor = new MotorTest();
             motor.obtenerPalabraAleatoria();
@@ -785,6 +806,10 @@ public class MainGUI extends javax.swing.JFrame {
        }
         this.ReiniciarjRadioButtonMenuItem1.setEnabled(true);
         this.palabraTextField.setEnabled(true);
+       }catch(SQLException ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());
+     
+     }
     }
     /**
      * @param args the command line arguments

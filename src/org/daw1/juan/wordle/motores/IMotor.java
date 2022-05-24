@@ -15,23 +15,23 @@ import java.sql.SQLException;
  */
 public interface IMotor {
     
-    public boolean existePalabra(String palabra);
-    
-    public String obtenerPalabraAleatoria();
-    
-    public boolean addPalabra(String palabra);
-    
-    public boolean removePalabra(String palabra);
-    
-    public boolean hayPalabras();
-    
-//        public boolean existePalabra(String palabra) throws SQLException,FileNotFoundException,IOException;
+//    public boolean existePalabra(String palabra);
 //    
-//    public String obtenerPalabraAleatoria() throws SQLException;
+//    public String obtenerPalabraAleatoria();
 //    
-//    public boolean addPalabra(String palabra) throws SQLException,IOException;
+//    public boolean addPalabra(String palabra);
 //    
-//    public boolean removePalabra(String palabra) throws SQLException,IOException;
+//    public boolean removePalabra(String palabra);
 //    
-//    public boolean hayPalabras() throws SQLException;
+//    public boolean hayPalabras();
+    
+     public boolean existePalabra(String palabra) throws SQLException,FileNotFoundException,IOException;
+    
+    public String obtenerPalabraAleatoria() throws SQLException;
+    
+    public boolean addPalabra(String palabra) throws SQLException,IOException;
+    
+    public boolean removePalabra(String palabra) throws SQLException,IOException;
+    
+    public boolean hayPalabras() throws SQLException;
 }

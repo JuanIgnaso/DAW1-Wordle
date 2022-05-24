@@ -4,7 +4,10 @@
  */
 package org.daw1.juan.wordle.gui;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import org.daw1.juan.wordle.motores.*;
 
 /**
@@ -17,12 +20,7 @@ public class GestorMotorGUI extends javax.swing.JDialog {
     /**
      * Creates new form GestorMotorGUI
      */
-    public GestorMotorGUI(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        
-        initComponents();
-        
-    }
+
     
       public GestorMotorGUI(java.awt.Frame parent, boolean modal,IMotor motor) {
         super(parent, modal);
@@ -174,7 +172,8 @@ public class GestorMotorGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AnadirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnadirjButtonActionPerformed
-        if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.AddPalabraTextField.getText()).matches()){
+     try{   
+      if(!Pattern.compile("[a-zA-Z]{5}").matcher(this.AddPalabraTextField.getText()).matches()){
           addErrorjLabel.setForeground(new java.awt.Color(255,0,0));
           addErrorjLabel.setText("La palabra no es valida.");
           this.AddPalabraTextField.setText(null);
@@ -187,14 +186,20 @@ public class GestorMotorGUI extends javax.swing.JDialog {
          this.AddPalabraTextField.setText(null);
          addErrorjLabel.setForeground(new java.awt.Color(0,153,0));
          addErrorjLabel.setText("Palabra añadida con exito.");
+      }
+     }catch(SQLException | IOException ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());
+     
+     }
     }//GEN-LAST:event_AnadirjButtonActionPerformed
-    }
+    
     private void BorrarjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarjTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BorrarjTextFieldActionPerformed
 
     private void BorrarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarjButton1ActionPerformed
-              if(!motor.removePalabra(this.BorrarjTextField.getText())){
+        try{
+        if(!motor.removePalabra(this.BorrarjTextField.getText())){
             this.removeErrorjLabel.setForeground(new java.awt.Color(255,0,0));
             this.removeErrorjLabel.setText("La palabra insertada no existe.");
             this.BorrarjTextField.setText(null);
@@ -204,6 +209,10 @@ public class GestorMotorGUI extends javax.swing.JDialog {
             this.removeErrorjLabel.setText("Palabra borrada con exito.");  
             this.BorrarjTextField.setText(null);
         }
+        }catch(SQLException | IOException ex){
+         JOptionPane.showMessageDialog(this, "Error en el programa" + ex.getMessage());
+     
+     }
     }//GEN-LAST:event_BorrarjButton1ActionPerformed
 
     /**
@@ -236,7 +245,7 @@ public class GestorMotorGUI extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GestorMotorGUI dialog = new GestorMotorGUI(new javax.swing.JFrame(), true);
+                GestorMotorGUI dialog = new GestorMotorGUI(new javax.swing.JFrame(), true,new MotorFichero());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
